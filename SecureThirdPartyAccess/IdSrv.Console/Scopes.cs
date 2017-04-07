@@ -11,7 +11,7 @@ namespace IdSrv.Console
             {
                 new Scope
                 {
-                    Name = "mohsin.khan"
+                    Name = "deloitte"
                 }
             };
         }

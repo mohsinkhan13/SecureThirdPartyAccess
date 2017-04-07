@@ -40,7 +40,7 @@ namespace MvcClient.Controllers
                 "crm",
                 "F621F470-9731-4A25-80EF-67A6F7C5F4B8");
 
-            return client.RequestClientCredentialsAsync("mohsin.khan").Result;
+            return client.RequestClientCredentialsAsync("deloitte").Result;
         }
 
         static async Task<System.Net.Http.HttpResponseMessage> CallApi(TokenResponse response)

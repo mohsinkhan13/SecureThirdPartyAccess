@@ -21,7 +21,7 @@ namespace IdSrv.Console
                     AccessTokenType = AccessTokenType.Reference,
                     AllowedScopes = new List<string>
                     {
-                        "mohsin.khan"
+                        "deloitte"
                     },
                     Flow = Flows.ClientCredentials,
                 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -46,23 +47,24 @@ namespace Cch.Apis
     static class Contacts
     {
         private static List<Contact> _contacts = new List<Contact>{
-                new Contact {ClientName="mohsin.khan",Name = "Contact 1" },
-                new Contact {ClientName="mohsin.khan",Name = "Contact 2" },
-                new Contact {ClientName="mohsin.khan",Name = "Contact 3" },
-                new Contact {ClientName="mohsink13",Name = "Contact 4" },
-                new Contact {ClientName="mohsink13",Name = "Contact 5" },
-                new Contact {ClientName="mohsink13",Name = "Contact 6" }
+                new Contact {Practice="deloitte",FirstName = "Bob", LastName = "Cox" },
+                new Contact {Practice="deloitte",FirstName = "Steve", LastName = "Green" },
+                new Contact {Practice="deloitte",FirstName = "Joe", LastName = "Blogs" },
+                new Contact {Practice="kpmg",FirstName = "Sarah", LastName="Smith" },
+                new Contact {Practice="kpmg",FirstName = "Claire", LastName = "Shine" },
+                new Contact {Practice="kpmg",FirstName = "Gemma", LastName = "G" }
             };
 
         public static List<Contact> GetContacts(string scope)
         {
-            return _contacts.Where(x => x.ClientName == scope).ToList();
+            return _contacts.Where(x => x.Practice == scope).ToList();
         }
     }
 
     public class Contact
     {
-        public string ClientName { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Practice { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Cch.Apis
             {
                 Authority = "http://localhost:5000",
                 ValidationMode = ValidationMode.ValidationEndpoint,
-                RequiredScopes = new[] { "mohsin.khan" }
+                RequiredScopes = new[] { "deloitte", "kpmg" }
             };
 
             app.UseIdentityServerBearerTokenAuthentication(options);
