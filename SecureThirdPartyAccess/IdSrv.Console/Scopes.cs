@@ -12,6 +12,10 @@ namespace IdSrv.Console
                 new Scope
                 {
                     Name = "deloitte"
+                },
+                new Scope
+                {
+                    Name = "kpmg"
                 }
             };
         }
