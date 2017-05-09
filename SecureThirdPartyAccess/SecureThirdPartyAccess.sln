@@ -16,6 +16,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cch.Apis", "Cch.Apis\Cch.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdSrv.Console", "IdSrv.Console\IdSrv.Console.csproj", "{DE069722-2010-4586-9EB8-30FA797D12E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcClient.HybridFlow", "MvcClient.HybridFlow\MvcClient.HybridFlow.csproj", "{2941CC17-AA2F-4955-9062-F5EE6D4F34A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cch.AaaSecuredApi", "Cch.AaaSecuredApi\Cch.AaaSecuredApi.csproj", "{54227DB0-C811-4F50-8DB9-396EBB52AFB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AAA", "AAA", "{C61D59D2-E4F9-44B4-A6C1-EA66F868659D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,8 +40,20 @@ Global
 		{DE069722-2010-4586-9EB8-30FA797D12E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE069722-2010-4586-9EB8-30FA797D12E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE069722-2010-4586-9EB8-30FA797D12E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2941CC17-AA2F-4955-9062-F5EE6D4F34A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2941CC17-AA2F-4955-9062-F5EE6D4F34A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2941CC17-AA2F-4955-9062-F5EE6D4F34A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2941CC17-AA2F-4955-9062-F5EE6D4F34A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54227DB0-C811-4F50-8DB9-396EBB52AFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54227DB0-C811-4F50-8DB9-396EBB52AFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54227DB0-C811-4F50-8DB9-396EBB52AFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54227DB0-C811-4F50-8DB9-396EBB52AFB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2941CC17-AA2F-4955-9062-F5EE6D4F34A2} = {C61D59D2-E4F9-44B4-A6C1-EA66F868659D}
+		{54227DB0-C811-4F50-8DB9-396EBB52AFB8} = {C61D59D2-E4F9-44B4-A6C1-EA66F868659D}
 	EndGlobalSection
 EndGlobal
