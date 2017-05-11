@@ -1,5 +1,8 @@
 ﻿using IdentityModel.Client;
+using MvcClient.HybridFlow.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SecureThirdPartyAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,33 +17,31 @@ namespace MvcClient.HybridFlow.Controllers
     public class HomeController : Controller
     {
         [Authorize]
-        public async Task<ActionResult> Index()
-        {
+        public async Task<ActionResult> Contacts() {
             //var response = GetClientToken(scope);
             var idToken = System.Security.Claims.ClaimsPrincipal.Current.Claims.FirstOrDefault(ss => ss.Type == "id_token").Value;
             var accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims.FirstOrDefault(ss => ss.Type == "access_token").Value;
 
-            //await CallGraphApi();
+            var viewModel = await CallGraphApi();
 
             var result = await CallApi(accessToken);
-            ViewBag.Contacts = result.Content.ReadAsStringAsync().Result;
+            var jsonResult = result.Content.ReadAsStringAsync().Result;
+            var contactList = JsonConvert.DeserializeObject<List<Contact>>(jsonResult);
+            viewModel.Contacts = contactList;
 
+            return View(viewModel);
+        }
+        public ActionResult Index() {
+            
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+        //public ActionResult Contact()
+        //{
+        //    ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        //    return View();
+        //}
 
         //static TokenResponse GetClientToken()
         //{
@@ -62,7 +63,7 @@ namespace MvcClient.HybridFlow.Controllers
             return result;
         }
 
-        async Task<System.Net.Http.HttpResponseMessage> CallGraphApi() {
+        async Task<ContactsViewModel> CallGraphApi() {
             var token = ((System.Security.Claims.ClaimsPrincipal)User).Identities.First().Claims.Single(x => x.Type == "access_token").Value;
             using (var client = new System.Net.Http.HttpClient()) {
                 client.SetBearerToken(token);
@@ -114,11 +115,15 @@ namespace MvcClient.HybridFlow.Controllers
                     ViewBag.Content = await response.Content.ReadAsStringAsync();
                     return null;
                 }
-                ViewBag.Companies = companies;
-                ViewBag.CompaniesUsers = companiesUsers;
+
+                var viewModel = new ContactsViewModel();
+                viewModel.Companies = companies;
+                viewModel.CompanyUsers = companiesUsers;
 
                 client.DefaultRequestHeaders.Remove("Accept");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+                return viewModel;
 
                 //var sub = ((System.Security.Claims.ClaimsPrincipal)User).Identities.First().Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
                 //if (Request.Form["form-name"] == "identity-form") {
@@ -137,7 +142,6 @@ namespace MvcClient.HybridFlow.Controllers
                 //    ViewBag.ChangePasswordNextLogon = (bool)idty.ChangePasswordNextLogon;
                 //}
             }
-            return null;
         }
     }
 }

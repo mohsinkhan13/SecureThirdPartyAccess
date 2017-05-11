@@ -1,0 +1,25 @@
+﻿@using MvcClient.HybridFlow.Models
+@model ContactsViewModel
+
+@{
+    ViewBag.Title = "Contacts";
+}
+
+
+@foreach(var contact in @Model.Contacts) {
+    <h1>Contact - @contact.FirstName</h1>
+
+    foreach(var company in @Model.Companies) {
+        <h2>Company - @company.Text</h2>
+        var users = Model.CompanyUsers[Guid.Parse(@company.Value)];
+        <h3>Company Users</h3>
+        foreach (var user in @users) {
+            <h4>@user.Item2 - @user.Item3</h4>
+        }
+
+    }
+}
+
+
+
+    

@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AAA", "AAA", "{C61D59D2-E4F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApi", "ContactApi\ContactApi.csproj", "{5370DF8F-7064-4FE6-9F1C-59384D9FFFA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureThirdPartyAccess.Model", "SecureThirdPartyAccessModel\SecureThirdPartyAccess.Model.csproj", "{1DD85BF7-E12C-403C-8051-B8A5A4B03967}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{5370DF8F-7064-4FE6-9F1C-59384D9FFFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5370DF8F-7064-4FE6-9F1C-59384D9FFFA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5370DF8F-7064-4FE6-9F1C-59384D9FFFA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DD85BF7-E12C-403C-8051-B8A5A4B03967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DD85BF7-E12C-403C-8051-B8A5A4B03967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DD85BF7-E12C-403C-8051-B8A5A4B03967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DD85BF7-E12C-403C-8051-B8A5A4B03967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +36,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2941CC17-AA2F-4955-9062-F5EE6D4F34A2} = {C61D59D2-E4F9-44B4-A6C1-EA66F868659D}
 		{5370DF8F-7064-4FE6-9F1C-59384D9FFFA9} = {C61D59D2-E4F9-44B4-A6C1-EA66F868659D}
+		{1DD85BF7-E12C-403C-8051-B8A5A4B03967} = {C61D59D2-E4F9-44B4-A6C1-EA66F868659D}
 	EndGlobalSection
 EndGlobal

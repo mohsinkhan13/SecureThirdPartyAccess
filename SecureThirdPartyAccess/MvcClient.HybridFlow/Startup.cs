@@ -46,7 +46,7 @@ namespace MvcClient.HybridFlow
                 Authority = baseURL,
                 ClientId = appClientId,
                 ResponseType = "code id_token token",
-                Scope = "openid IDInfo wksampleapi profile offline_access",
+                Scope = "openid IDInfo wksampleapi profile offline_access WK.GraphAPI.User",
                 RedirectUri = "http://localhost:18473/",
                 PostLogoutRedirectUri = "http://localhost:18473/",
                 SignInAsAuthenticationType = "Cookies",

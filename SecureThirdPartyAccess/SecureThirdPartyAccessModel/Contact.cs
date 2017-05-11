@@ -1,4 +1,4 @@
-﻿namespace ContactApi
+﻿namespace SecureThirdPartyAccess.Model
 {
     public class Contact
     {

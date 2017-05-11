@@ -137,13 +137,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Contact.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="InMemoryContactRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SecureThirdPartyAccessModel\SecureThirdPartyAccess.Model.csproj">
+      <Project>{1dd85bf7-e12c-403c-8051-b8a5a4b03967}</Project>
+      <Name>SecureThirdPartyAccess.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
