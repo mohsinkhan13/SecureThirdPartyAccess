@@ -38,12 +38,19 @@ namespace MvcClient.HybridFlow.Controllers
 
             return View(viewModel);
         }
+
         public ActionResult Index() {
             
             return View();
         }
 
-        static async Task<System.Net.Http.HttpResponseMessage> CallApi(string accessToken)
+        public ActionResult About() {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        private async Task<System.Net.Http.HttpResponseMessage> CallApi(string accessToken)
         {
             var client = new System.Net.Http.HttpClient();
             client.SetBearerToken(accessToken);
@@ -53,7 +60,7 @@ namespace MvcClient.HybridFlow.Controllers
             return result;
         }
 
-        async Task<ContactsViewModel> CallGraphApi() {
+        private async Task<ContactsViewModel> CallGraphApi() {
             var token = ((System.Security.Claims.ClaimsPrincipal)User).Identities.First().Claims.Single(x => x.Type == "access_token").Value;
             using (var client = new System.Net.Http.HttpClient()) {
                 client.SetBearerToken(token);
