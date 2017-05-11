@@ -1,4 +1,4 @@
-﻿namespace Cch.Apis
+﻿namespace ContactApi.Apis
 {
     public class Contact
     {

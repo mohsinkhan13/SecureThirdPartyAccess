@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Cch.Apis
+namespace ContactApi.Apis
 {
     public class InMemoryContactsRepository
     {

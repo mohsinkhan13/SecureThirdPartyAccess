@@ -5,9 +5,9 @@ using Owin;
 using System.Web.Http;
 using Thinktecture.IdentityServer.v3.AccessTokenValidation;
 
-[assembly: OwinStartup(typeof(Cch.AaaSecuredApi.Startup))]
+[assembly: OwinStartup(typeof(ContactApi.AaaSecuredApi.Startup))]
 
-namespace Cch.AaaSecuredApi
+namespace ContactApi.AaaSecuredApi
 {
     public class Startup
     {
