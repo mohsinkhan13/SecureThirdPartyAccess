@@ -18,16 +18,23 @@ namespace MvcClient.HybridFlow.Controllers
     {
         [Authorize]
         public async Task<ActionResult> Contacts() {
-            //var response = GetClientToken(scope);
             var idToken = System.Security.Claims.ClaimsPrincipal.Current.Claims.FirstOrDefault(ss => ss.Type == "id_token").Value;
             var accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims.FirstOrDefault(ss => ss.Type == "access_token").Value;
 
-            var viewModel = await CallGraphApi();
-
             var result = await CallApi(accessToken);
-            var jsonResult = result.Content.ReadAsStringAsync().Result;
-            var contactList = JsonConvert.DeserializeObject<List<Contact>>(jsonResult);
-            viewModel.Contacts = contactList;
+            ViewBag.Message = result.Content.ReadAsStringAsync().Result;
+
+            var claims = System.Security.Claims.ClaimsPrincipal.Current.Claims;
+            var claim = claims.FirstOrDefault(x => x.Type.ToLower() == "name");
+            var listOfContacts = new List<Contact> {
+                new Contact { FirstName = claim.Value }
+            };
+
+            var viewModel = await CallGraphApi();
+            if (viewModel != null)
+                viewModel.Contacts = listOfContacts;
+            else
+                return View("ErrorMsg");
 
             return View(viewModel);
         }
@@ -35,23 +42,6 @@ namespace MvcClient.HybridFlow.Controllers
             
             return View();
         }
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
-
-        //static TokenResponse GetClientToken()
-        //{
-        //    var client = new TokenClient(
-        //        "http://localhost:5000/connect/token",
-        //        "WKSampleHybrid",
-        //        "123456");
-
-        //    return client.RequestAuthorizationCodeAsync().Result;
-        //}
 
         static async Task<System.Net.Http.HttpResponseMessage> CallApi(string accessToken)
         {
@@ -124,23 +114,6 @@ namespace MvcClient.HybridFlow.Controllers
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
 
                 return viewModel;
-
-                //var sub = ((System.Security.Claims.ClaimsPrincipal)User).Identities.First().Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
-                //if (Request.Form["form-name"] == "identity-form") {
-                //    var patch = new {
-                //        ChangePasswordNextLogon = (Request.Form["ChangePasswordNextLogon"].StartsWith("true,")),
-                //    };
-                //    response = await client.PatchAsJsonAsync(
-                //        $"{graphApiServer.Replace("/v1/", "/v1.2/")}identities/{sub}?$select=ChangePasswordNextLogon&$expand="
-                //        , patch);
-                //}
-
-                //response = await client.GetAsync(graphApiServer.Replace("/v1/", "/v1.2/") + $"identities/{sub}?$select=ChangePasswordNextLogon&$expand=");
-                //var body = await response.Content.ReadAsStringAsync();
-                //if (response.IsSuccessStatusCode) {
-                //    dynamic idty = JObject.Parse(await response.Content.ReadAsStringAsync());
-                //    ViewBag.ChangePasswordNextLogon = (bool)idty.ChangePasswordNextLogon;
-                //}
             }
         }
     }

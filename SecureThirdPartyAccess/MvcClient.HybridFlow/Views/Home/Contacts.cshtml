@@ -5,6 +5,8 @@
     ViewBag.Title = "Contacts";
 }
 
+<h3>@ViewBag.Message</h3>
+
 
 @foreach(var contact in @Model.Contacts) {
     <h1>Contact - @contact.FirstName</h1>
