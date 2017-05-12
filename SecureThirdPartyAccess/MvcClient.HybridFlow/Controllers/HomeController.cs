@@ -18,19 +18,18 @@ namespace MvcClient.HybridFlow.Controllers
     {
         [Authorize]
         public async Task<ActionResult> Contacts() {
+            var identityNameClaim = System.Security.Claims.ClaimsPrincipal.Current.Claims.FirstOrDefault(x => x.Type.ToLower() == "name");
+            var listOfContacts = new List<Contact> {
+                new Contact { FirstName = identityNameClaim.Value }
+            };
+
             var idToken = System.Security.Claims.ClaimsPrincipal.Current.Claims.FirstOrDefault(ss => ss.Type == "id_token").Value;
             var accessToken = System.Security.Claims.ClaimsPrincipal.Current.Claims.FirstOrDefault(ss => ss.Type == "access_token").Value;
 
             var result = await CallApi(accessToken);
             ViewBag.Message = result.Content.ReadAsStringAsync().Result;
 
-            var claims = System.Security.Claims.ClaimsPrincipal.Current.Claims;
-            var claim = claims.FirstOrDefault(x => x.Type.ToLower() == "name");
-            var listOfContacts = new List<Contact> {
-                new Contact { FirstName = claim.Value }
-            };
-
-            var viewModel = await CallGraphApi();
+            var viewModel = await CallGraphApi(accessToken);
             if (viewModel != null)
                 viewModel.Contacts = listOfContacts;
             else
@@ -60,10 +59,9 @@ namespace MvcClient.HybridFlow.Controllers
             return result;
         }
 
-        private async Task<ContactsViewModel> CallGraphApi() {
-            var token = ((System.Security.Claims.ClaimsPrincipal)User).Identities.First().Claims.Single(x => x.Type == "access_token").Value;
+        private async Task<ContactsViewModel> CallGraphApi(string accessToken) {
             using (var client = new System.Net.Http.HttpClient()) {
-                client.SetBearerToken(token);
+                client.SetBearerToken(accessToken);
                 client.DefaultRequestHeaders.Add("Accept", "application/vnd.WoltersKluwer.json");
 
                 var graphApiServer = "https://apitest.wolterskluwercloud.com/graphapi/api/v1/";

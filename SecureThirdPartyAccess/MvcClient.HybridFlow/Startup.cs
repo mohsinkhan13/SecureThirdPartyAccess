@@ -54,22 +54,19 @@ namespace MvcClient.HybridFlow
 
                 //UseTokenLifetime = false,
 
-                Notifications = new OpenIdConnectAuthenticationNotifications
-                {
+                Notifications = new OpenIdConnectAuthenticationNotifications {
                     // Authorization code received!!
-                    AuthorizationCodeReceived = async n =>
-                    {
+                    AuthorizationCodeReceived = async n => {
                         // the authorization code was received, so now we call the Authorizatioin server to get
                         // the authorization and the refresh token 
 
                         // ----------------------------------------------------------------
                         // var result = await AuthUtil.ProcessAuthorizationCode(n, BaseURL,
-                        //    "WKSampleHybrid", "123456");
+                        //    "WK.UK.MvcClient", "123456");
                         // ----------------------------------------------------------------
 
                         // filter "protocol" claims
-                        try
-                        {
+                        try {
 
 
                             List<Claim> claims = new List<Claim>(from c in n.AuthenticationTicket.Identity.Claims
@@ -103,38 +100,10 @@ namespace MvcClient.HybridFlow
                             // Authenticates the current application
                             n.AuthenticationTicket = new AuthenticationTicket(new ClaimsIdentity(claims.Distinct(new Thinktecture.IdentityModel.ClaimComparer()), n.AuthenticationTicket.Identity.AuthenticationType), n.AuthenticationTicket.Properties);
                         }
-                        catch (Exception)
-                        {
+                        catch (Exception) {
                             throw;
                         }
-                    },
-
-                    // The identity provider is going to be called
-                    RedirectToIdentityProvider = async n =>
-                    {
-
-                        n.ProtocolMessage.AcrValues = "wkLoginMsg:SPC";
-
-                        // if signing out, add the id_token_hint to the protocol message
-                        if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.LogoutRequest)
-                        {
-                            //AuthUtil.SetTokenHint(n, "id_token");
-
-                            Claim idTokenHint = n.OwinContext.Authentication.User.FindFirst("id_token");
-                            if (idTokenHint != null)
-                                n.ProtocolMessage.IdTokenHint = idTokenHint.Value;
-                        }
-
-                        //Gets the "idp" parameter to force the rediretion to a specific IDP
-                        if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.AuthenticationRequest)
-                        {
-                            var identityProvider = HttpContext.Current.Request.QueryString["idp"];
-                            if (!string.IsNullOrWhiteSpace(identityProvider))
-                                AuthUtil.SetIdentityProviderHint(n, identityProvider);
-                        }
-
-                        await Task.FromResult(0);
-                    },
+                    }
                 }
             });
         }

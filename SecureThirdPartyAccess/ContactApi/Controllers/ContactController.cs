@@ -19,7 +19,7 @@ namespace ContactApi.Controllers
     public class ContactController : ApiController
     {
         public string Get() {
-            return string.Format("Message from secured resource - {0}", DateTime.Now.ToLocalTime());
+            return string.Format("Message from protected resource - {0}", DateTime.Now.ToLocalTime());
         }
     }
 }
